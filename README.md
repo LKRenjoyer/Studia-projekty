@@ -2,7 +2,7 @@
 Some of the projects I've done at uni + courses I've taken.
 
  # SEMESTER 1
- - Course : Programmer tools - intro (PWI) - Chess engines : (repo-url)
+ - Course : Programmer tools - intro (PWI) - Chess engines : [See](https://github.com/LKRenjoyer/Chess_Arena_PWI_23/tree/newmain/turbo_engine)
  - Logic for Computer Scientists (Advanced) (LDI (Z))
  - Discrete Mathematics (M/advanced) (MD(M))
  - Calculus I (extended)
@@ -12,7 +12,7 @@ Some of the projects I've done at uni + courses I've taken.
 - Algebra I (extended)
 - Calculus II (extended)
 - Methods of Programming
-- Object Oriented Programming - Scrabble : ([GOTO](python-scrabble))
+- Object Oriented Programming - Scrabble : ([See](python-scrabble))
 - Topology
 
 # SEMESTER 3 
