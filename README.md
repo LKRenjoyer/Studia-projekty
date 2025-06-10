@@ -12,7 +12,7 @@ Some of the projects I've done at uni + courses I've taken.
 - Algebra I (extended)
 - Calculus II (extended)
 - Methods of Programming
-- Object Oriented Programming - Scrabble : ([a relative link](python-scrabble))
+- Object Oriented Programming - Scrabble : ([GOTO](python-scrabble))
 - Topology
 
 # SEMESTER 3 
