@@ -25,6 +25,6 @@ Some of the projects I've done at uni + courses I've taken.
 
 # SEMESTER 4
 - Algorithms and Data Structures
-- Databases - Online Car Parts Catalogue and Admin Panel : (folder url)
+- Databases - Online Car Parts Catalogue and Admin Panel : [See](https://github.com/ii-bazy/bazy-danych-2025-projekt-carparts/tree/main)
 - Differential Equations 1R (extended)
-- Artificial Intelligence
+- Artificial Intelligence - Reversi bot : (alpha-beta)/(monte-carlo-tree-search) | Animal chess bot : (alpha-beta)
