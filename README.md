@@ -19,7 +19,7 @@ Some of the projects I've done at uni + courses I've taken.
 - Algebra II (extended)
 - Numerical Analisys
 - Elements of Theory of Argumentation
-- Course : Programming in Rust - Fractals Generator : (folder url) | LOGO language Interpreter : (folder url)
+- Course : Programming in Rust - Fractals Generator : [See](rust/fractal-generator) | LOGO language Interpreter : [See](rust/logo-interpreter)
 - Course : Advanced Python
 - Practises of Software Design - Multiplayer Connect4 : (folder url)
 
