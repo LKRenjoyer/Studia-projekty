@@ -1,0 +1,13 @@
+[package]
+name = "logo_int"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+lalrpop = "0.19.7"
+
+[dependencies]
+regex = "1"
+rand = "0.8.5"
+lalrpop-util = "0.19.7"
+lalrpop = "0.19.7"

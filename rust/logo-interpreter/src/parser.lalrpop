@@ -1,0 +1,99 @@
+
+use crate::ast::astree::*;
+
+
+grammar;
+
+
+pub Expr: Box<Expr> = {
+    <l:Expr> "+" <r:Factor> => Box::new(Expr::BinExpr(Binop::Add, l, r)),
+    <l:Expr> "-" <r:Factor> => Box::new(Expr::BinExpr(Binop::Sub, l, r)),
+    Factor,
+};
+
+Factor: Box<Expr> = {
+    <l:Factor> "*" <r:Term> => Box::new(Expr::BinExpr(Binop::Mul, l, r)),
+    <l:Factor> "/" <r:Term> => Box::new(Expr::BinExpr(Binop::Div, l, r)),
+    <l:Factor> "%" <r:Term> => Box::new(Expr::BinExpr(Binop::Mod, l, r)),
+    Term,
+};
+
+Term: Box<Expr> = {
+    "(" "-" <l: Literal> ")" => Box::new(Expr::UnExpr(Unop::Neg, l)),
+    "(" <f:Function> ")" => Box::new(Expr::Function(f)),
+    Literal,
+};
+
+Literal: Box<Expr> = {
+    Num => Box::new(<>),
+    Var  => Box::new(<>),
+    Word => Box::new(<>),
+    "(" <Expr> ")",
+};
+
+Num: Expr = {
+    <n: r"[0-9]+[\.]?[0-9]*"> => Expr::Number(n.parse::<f64>().unwrap()),
+};
+
+Var: Expr = {
+    ":"<n: r"[a-zA-Z]+"> => Expr::Var(n.to_string()),
+};
+
+Word: Expr = {
+    "\""<n: r"[a-zA-Z]+"> => Expr::Word(n.to_string()),
+};
+
+
+FuncName: String = {
+    r"[a-zA-Z]+" => String::from(<>)
+}
+
+pub Function: Fun = {
+    <n:FuncName> => Fun{name: n, args: vec![]},
+    <n:FuncName> <a:Arglist> => Fun{name: n, args: a},
+}
+
+pub Commands: Vec<Fun> = {
+    <f: Function> => vec![f],
+    <i: Commands> <f: Function> => cons(i, f),
+}
+
+pub Comp : Arg = {
+    <a:Expr> "<"  <b:Expr> => Arg::Comp(Compop::Less, a, b),
+    <a:Expr> "<=" <b:Expr> => Arg::Comp(Compop::LessEq, a, b),
+    <a:Expr> ">"  <b:Expr> => Arg::Comp(Compop::More, a, b),
+    <a:Expr> ">=" <b:Expr> => Arg::Comp(Compop::MoreEq, a, b),
+    <a:Expr> "="  <b:Expr> => Arg::Comp(Compop::Equal, a, b),
+}
+
+pub Argument : Arg  = {
+    <e:Expr> => Arg::Expr(e),
+    Comp,
+    "[" <i:Commands> "]" => Arg::List(i),
+    "[" "]" => Arg::List(vec![]),
+}
+
+pub Arglist : Vec<Arg> = {
+    <a:Argument>  => vec![a],
+    <a:Arglist> <x:Argument> => cons(a, x),
+}
+
+ArgDeclaration: Vec<String> = {
+    ":"<n: r"[a-zA-Z]+"> => vec![n.to_string()],
+    <args:ArgDeclaration> ":"<n: r"[a-zA-Z]+"> => cons(args, n.to_string()),
+}
+
+pub FuncDec: Declaration = {
+    "TO" <n:FuncName> <c:Commands> "END" => Declaration{name: n, args: vec![], commands: c},
+    "TO" <n:FuncName> <a:ArgDeclaration> <c:Commands> "END" => Declaration{name: n, args: a, commands: c},
+}
+
+FuncList: Vec<Declaration> = {
+    <f: FuncDec> => vec![f],
+    <l: FuncList> <f: FuncDec> => cons(l, f),
+}
+
+pub Program: Program = {
+    <c:Commands> => Program{functions: vec![], instructions: c},
+    <f:FuncList> <c:Commands> => Program{functions: f, instructions: c},
+}
